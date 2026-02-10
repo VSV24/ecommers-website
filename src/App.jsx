@@ -1,20 +1,18 @@
-import { useState } from 'react'
+import { Routes, Route } from 'react-router'
+import HomePage from './pages/HomePage'
 import './App.css'
+import CheckoutPage from './pages/CheckoutPage'
 
 function App() {
-  const [name,setName] = useState({firstname:'',lastname:''})
-  // function handleSubmit(e){
-  //   e.preventDefault()
-  //   console.log(name)
-  // }
+
 
   return(
-    <div>
-      <h1>{name.firstname} - {name.lastname}</h1>
-      <input type="text" onChange={(e)=> setName({...name,firstname:e.target.value})} value={name.firstname} />
-      <input type="text" onChange={(e)=> setName({...name,lastname:e.target.value})} value={name.lastname} />
-      <button onClick={()=>console.log(name)}>submit</button>
-    </div>
+    <>
+      <Routes>
+        <Route path='/' element={<HomePage/>} />
+        <Route path='checkout' element={<CheckoutPage/>} />
+      </Routes>
+    </>
   )
   
 }
