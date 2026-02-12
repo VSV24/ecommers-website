@@ -13,7 +13,7 @@ function App() {
   useEffect(() => {
     axios.get('/api/cart-items?expand=product')
     .then((res) => setCart(res.data))
-    .catch(console.error('error while loading cart'))
+    // .catch(console.error('error while loading cart'))
   },[])
 
   return(
@@ -21,7 +21,7 @@ function App() {
       <Routes>
         <Route path='/' element={<HomePage cart={cart} />} />
         <Route path='checkout' element={<CheckoutPage cart={cart} />} />
-        <Route path='orders' element={<OrdersPage/>} />
+        <Route path='orders' element={<OrdersPage cart={cart} />} />
         <Route path='Tracking' element={<TrackingPage/>} />
       </Routes>
     </>

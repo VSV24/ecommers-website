@@ -8,12 +8,16 @@ import { useState, useEffect } from 'react'
 
 const CheckoutPage = ({ cart }) => {
   let [deliveryOptions, setDeliveryOptions] = useState([])
+  let [paymentSummary, setPaymentSummary] = useState(null)
 
   useEffect(() => {
     axios.get('/api/delivery-options?expand=estimatedDeliveryTime')
       .then((res) => setDeliveryOptions(res.data))
-      .catch(console.error('error while loading delivery-options'))
+    // .catch(console.error('error while loading delivery-options'))
 
+    axios.get('/api/payment-summary')
+      .then((res) => setPaymentSummary(res.data))
+    // .catch(console.error('error while loading payment summary'))
   }, [])
 
   return (
@@ -83,7 +87,7 @@ const CheckoutPage = ({ cart }) => {
                         Choose a delivery option:
                       </div>
                       {deliveryOptions.map((deliveryOption) => {
-                        
+
                         let priceString = 'FREE SHIPPING';
                         if (deliveryOption.priceCents > 0) {
                           priceString = `${formatMoney(deliveryOption.priceCents)} - shipping`
@@ -120,34 +124,39 @@ const CheckoutPage = ({ cart }) => {
               Payment Summary
             </div>
 
-            <div className="payment-summary-row">
-              <div>Items (3):</div>
-              <div className="payment-summary-money">$42.75</div>
-            </div>
+            {paymentSummary && (
+              <>
+                <div className="payment-summary-row">
+                  <div>Items ({paymentSummary.totalItems}):</div>
+                  <div className="payment-summary-money">{formatMoney(paymentSummary.totalCostCents)}</div>
+                </div>
 
-            <div className="payment-summary-row">
-              <div>Shipping &amp; handling:</div>
-              <div className="payment-summary-money">$4.99</div>
-            </div>
+                <div className="payment-summary-row">
+                  <div>Shipping &amp; handling:</div>
+                  <div className="payment-summary-money">{formatMoney(paymentSummary.shippingCostCents)}</div>
+                </div>
 
-            <div className="payment-summary-row subtotal-row">
-              <div>Total before tax:</div>
-              <div className="payment-summary-money">$47.74</div>
-            </div>
+                <div className="payment-summary-row subtotal-row">
+                  <div>Total before tax:</div>
+                  <div className="payment-summary-money">{formatMoney(paymentSummary.totalCostBeforeTaxCents)}</div>
+                </div>
 
-            <div className="payment-summary-row">
-              <div>Estimated tax (10%):</div>
-              <div className="payment-summary-money">$4.77</div>
-            </div>
+                <div className="payment-summary-row">
+                  <div>Estimated tax (10%):</div>
+                  <div className="payment-summary-money">{formatMoney(paymentSummary.taxCents)}</div>
+                </div>
 
-            <div className="payment-summary-row total-row">
-              <div>Order total:</div>
-              <div className="payment-summary-money">$52.51</div>
-            </div>
+                <div className="payment-summary-row total-row">
+                  <div>Order total:</div>
+                  <div className="payment-summary-money">{formatMoney(paymentSummary.totalCostCents)}</div>
+                </div>
 
-            <button className="place-order-button button-primary">
-              Place your order
-            </button>
+                <button className="place-order-button button-primary">
+                  Place your order
+                </button>
+              </>
+            )}
+
           </div>
         </div>
       </div>
