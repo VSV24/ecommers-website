@@ -11,7 +11,7 @@ function App() {
   const [cart, setCart] = useState([])
   
   useEffect(() => {
-    axios.get('http://localhost:3000/api/cart-items?expand=product')
+    axios.get('/api/cart-items?expand=product')
     .then((res) => setCart(res.data))
     .catch(console.error('error while loading cart'))
   },[])

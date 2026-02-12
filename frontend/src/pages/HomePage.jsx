@@ -9,9 +9,9 @@ const HomePage = ({cart}) => {
   const [products, setProducts] = useState([])
   
   useEffect(() => {
-    axios.get('http://localhost:3000/api/products')
+    axios.get('/api/products')
     .then((res) => setProducts(res.data))
-    .catch(console.error('error'))
+    .catch(console.error('error while loading products'))
   },[])
   return (
     <>
