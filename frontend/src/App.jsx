@@ -1,9 +1,9 @@
 import { Routes, Route } from 'react-router'
-import HomePage from './pages/HomePage'
+import HomePage from './pages/home/HomePage'
 import axios from 'axios'
 import { useState,useEffect } from 'react'
 import './App.css'
-import CheckoutPage from './pages/CheckoutPage'
+import CheckoutPage from './pages/checkout/CheckoutPage'
 import OrdersPage from './pages/OrdersPage'
 import TrackingPage from './pages/TrackingPage'
 
@@ -13,7 +13,7 @@ function App() {
   useEffect(() => {
     axios.get('/api/cart-items?expand=product')
     .then((res) => setCart(res.data))
-    // .catch(console.error('error while loading cart'))
+    .catch(err => console.error('Failed to load cart-items', err))
   },[])
 
   return(
