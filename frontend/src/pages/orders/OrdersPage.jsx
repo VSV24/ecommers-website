@@ -1,18 +1,13 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment} from 'react'
 import './OrdersPage.css'
 import Header from '../../components/Header'
-import axios from 'axios'
+// import axios from 'axios'
 import dayjs from 'dayjs'
 import { formatMoney } from '../../utils/money'
 import OrderDetailsGrid from './OrderDetailsGrid'
 
-const OrdersPage = ({ cart }) => {
-  const [orders, setOrders] = useState([])
-  useEffect(() => {
-    axios.get('/api/orders?expand=products')
-      .then((res) => setOrders(res.data))
-
-  }, [])
+const OrdersPage = ({ cart, orders }) => {
+  
   return (
     <>
       <title>Orders</title>
