@@ -1,12 +1,12 @@
 import React from 'react'
 import './TrackingPage.css'
-import Header from '../components/Header'
+import Header from '../../components/Header'
 
-const TrackingPage = () => {
+const TrackingPage = ({cart}) => {
   return (
     <>
       <title>tracking</title>
-      <Header />
+      <Header cart={cart} />
 
     <div className="tracking-page">
       <div className="order-tracking">
