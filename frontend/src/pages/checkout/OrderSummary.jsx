@@ -4,7 +4,7 @@ import { formatMoney } from '../../utils/money'
 import DeliveryOptions from './DeliveryOptions'
 
 
-const OrderSummary = ({cart, deliveryOptions}) => {
+const OrderSummary = ({cart, deliveryOptions , loadCart}) => {
   return (
     <>
       <div className="order-summary">
@@ -42,7 +42,7 @@ const OrderSummary = ({cart, deliveryOptions}) => {
                   </div>
                 </div>
 
-                <DeliveryOptions deliveryOptions={deliveryOptions} cartItem={cartItem} /> 
+                <DeliveryOptions deliveryOptions={deliveryOptions} cartItem={cartItem} loadCart={loadCart} /> 
               </div>
             </div>
           )

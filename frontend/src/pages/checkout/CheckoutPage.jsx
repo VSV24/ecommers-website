@@ -7,7 +7,7 @@ import OrderSummary from './OrderSummary';
 import CheckoutHeader from './CheckoutHeader';
 import PaymentSummary from './PaymentSummary';
 
-const CheckoutPage = ({ cart }) => {
+const CheckoutPage = ({ cart , loadCart}) => {
   let [deliveryOptions, setDeliveryOptions] = useState([])
   let [paymentSummary, setPaymentSummary] = useState(null)
 
@@ -16,10 +16,13 @@ const CheckoutPage = ({ cart }) => {
       .then((res) => setDeliveryOptions(res.data))
       .catch(err => console.error('Failed to load delivery-options', err))
 
+  }, [])
+  useEffect(() => {
     axios.get('/api/payment-summary')
       .then((res) => setPaymentSummary(res.data))
       .catch(err => console.error('Failed to load payment-summary', err))
-  }, [])
+  },[cart])
+
 
   return (
     <>
@@ -30,7 +33,7 @@ const CheckoutPage = ({ cart }) => {
         <div className="page-title">Review your order</div>
 
         <div className="checkout-grid">
-          <OrderSummary cart={cart} deliveryOptions={deliveryOptions} />
+          <OrderSummary cart={cart} deliveryOptions={deliveryOptions} loadCart={loadCart} />
 
           <PaymentSummary paymentSummary={paymentSummary} />
         </div>
