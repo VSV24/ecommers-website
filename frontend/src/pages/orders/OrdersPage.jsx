@@ -6,7 +6,7 @@ import dayjs from 'dayjs'
 import { formatMoney } from '../../utils/money'
 import OrderDetailsGrid from './OrderDetailsGrid'
 
-const OrdersPage = ({ cart, orders }) => {
+const OrdersPage = ({ cart, orders , loadCart }) => {
   
   return (
     <>
@@ -39,7 +39,7 @@ const OrdersPage = ({ cart, orders }) => {
                     </div>
                   </div>
 
-                  <OrderDetailsGrid order={order} />
+                  <OrderDetailsGrid order={order} loadCart={loadCart} />
                 </div>
             )
           })}
