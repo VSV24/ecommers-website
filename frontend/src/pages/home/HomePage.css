@@ -131,17 +131,17 @@
 }
 
 .home-page .added-to-cart {
-  color: rgb(25, 135, 84);
-  font-size: 16px;
-
+  height: 24px;              /* reserve space */
   display: flex;
   align-items: center;
-  margin-bottom: 8px;
-
-  /* At first, the "Added to cart" message will
-     be invisible. Use JavaScript to change the
-     opacity and make it visible. */
+  gap: 6px;
   opacity: 0;
+  visibility: hidden;
+}
+
+.added-to-cart.visible {
+  opacity: 1;
+  visibility: visible;
 }
 
 .home-page .added-to-cart img {
